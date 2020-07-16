@@ -1,0 +1,10 @@
+div.main-container {
+  display: table;
+}
+div.dashboard-line {
+  display: table-row;
+}
+div.column-issue-box {
+  border-style : double;
+  display: table-cell;
+} 

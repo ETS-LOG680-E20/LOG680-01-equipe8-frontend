@@ -1,7 +1,6 @@
 # log680-equipe8-frontend
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Application Frontend fait à partir d'Ember et de Bootstrap. Cette application présente les donnes recueillies par notre API dans différents projets GitHub. 
 
 ## Prerequisites
 
