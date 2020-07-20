@@ -1,28 +1,59 @@
 
-<div class="main-container">
+<div class="container">
+  <h2>Time interval</h2>
+  <div class="row">
+    <div class="col-sm">
+      Start date:
+      <EmberFlatpickr
+        @defaultDate={{this.defaultDate}}
+        @onChange={{action (mut this.startDate)}}
+      />
+    </div>
+    <div class="col-sm">
+      End date:
+      <EmberFlatpickr
+        @defaultDate={{this.defaultDate}}
+        @onChange={{action (mut this.endDate)}}
+      />
+    </div>
+    <div class="col-sm">
+      <button type="button" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+<hr>
   <h2>Issues per column</h2>
-  <div class="dashboard-line">
+  <div class="row">
     <ColumnIssues @columnName="SomeName" @numberOfIssues="150">
     </ColumnIssues>
     <ColumnIssues @columnName="SomeOtherName" @numberOfIssues="20">
     </ColumnIssues>
+    <ColumnIssues @columnName="ThirdCol" @numberOfIssues="15">
+    </ColumnIssues>
+    <ColumnIssues @columnName="LastCol" @numberOfIssues="3">
+    </ColumnIssues>
   </div>
+  <hr>
   <h2>Process time of issues</h2>
-  <h2>Process time with interval</h2>
-  <div class="dashboard-line">
-    <label>
-      Start date:
-      <EmberFlatpickr
-        @onChange={{action (mut this.dateValue)}}
-      />
-    </label>
-    <label>
-      End date:
-      <EmberFlatpickr
-        @onChange={{action (mut this.dateValue)}}
-      />
-    </label>
+  <div class="row">
+
   </div>
+  <hr>
+
+  <h2>Process time of completed with interval</h2>
+  <hr>
+
   <h2>Completed items with interval</h2>
+  <hr>
+
   <h2>State of issues with time interval</h2>
+  <div class="row">
+    <ColumnIssues @columnName="SomeName" @numberOfIssues="150">
+    </ColumnIssues>
+    <ColumnIssues @columnName="SomeOtherName" @numberOfIssues="20">
+    </ColumnIssues>
+    <ColumnIssues @columnName="ThirdCol" @numberOfIssues="15">
+    </ColumnIssues>
+    <ColumnIssues @columnName="LastCol" @numberOfIssues="3">
+    </ColumnIssues>
+  </div>
 </div>
