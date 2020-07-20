@@ -1,9 +1,28 @@
 
 <div class="main-container">
+  <h2>Issues per column</h2>
   <div class="dashboard-line">
     <ColumnIssues @columnName="SomeName" @numberOfIssues="150">
     </ColumnIssues>
     <ColumnIssues @columnName="SomeOtherName" @numberOfIssues="20">
     </ColumnIssues>
   </div>
+  <h2>Process time of issues</h2>
+  <h2>Process time with interval</h2>
+  <div class="dashboard-line">
+    <label>
+      Start date:
+      <EmberFlatpickr
+        @onChange={{action (mut this.dateValue)}}
+      />
+    </label>
+    <label>
+      End date:
+      <EmberFlatpickr
+        @onChange={{action (mut this.dateValue)}}
+      />
+    </label>
+  </div>
+  <h2>Completed items with interval</h2>
+  <h2>State of issues with time interval</h2>
 </div>
