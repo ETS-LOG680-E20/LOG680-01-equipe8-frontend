@@ -7,4 +7,7 @@ div.dashboard-line {
 div.column-issue-box {
   border-style : double;
   display: table-cell;
-} 
+}
+h1 {
+  text-align: center;
+}

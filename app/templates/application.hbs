@@ -1,26 +1,29 @@
-<h1>GitHub Stats</h1>
+<div class="container">
+  <h1>GitHub Stats</h1>
 
-<BsNavbar
-  @type="light"
-  @backgroundColor="light"as |navbar|>
-  <div class="navbar-header">
-    {{navbar.toggle}}
-    <LinkTo @route="main" @class="navbar-brand">Projets</LinkTo>
-  </div>
+  <BsNavbar
+    @type="light"
+    @backgroundColor="light"as |navbar|>
+    
 
-  <navbar.content>
-    <navbar.nav as |nav|>
+    <navbar.content>
+      <div class="navbar-header">
+        {{navbar.toggle}}
+        <LinkTo @route="main" @class="navbar-brand">Projets</LinkTo>
+      </div>
+      <navbar.nav as |nav|>
 
-      <nav.item>
-        <nav.link-to @route="main">Projet 1</nav.link-to>
-      </nav.item>
+        <nav.item>
+          <nav.link-to @route="main">Projet 1</nav.link-to>
+        </nav.item>
 
-      <nav.item>
-        <nav.link-to @route="main">Projet 1</nav.link-to>
-      </nav.item>
-      
-    </navbar.nav>
-  </navbar.content>
-</BsNavbar>
+        <nav.item>
+          <nav.link-to @route="main">Projet 1</nav.link-to>
+        </nav.item>
+        
+      </navbar.nav>
+    </navbar.content>
+  </BsNavbar>
 
-{{outlet}}
+  {{outlet}}
+</div>
