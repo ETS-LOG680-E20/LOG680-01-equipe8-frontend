@@ -13,6 +13,17 @@ export default class MainRoute extends Route {
     console.log('je suis ici');
     this.set('baseURL', 'https://localhost:44319/metric/');
     return this.getAll(searchId, startDate.toDateString(), endDate.toDateString());
+	this.set('chartOptions',{
+		showArea: true,
+		lineSmooth: false,
+
+		axisX: {
+		  showGrid: false
+		}
+	  });
+
+    return this.getAll(4601, this.lastMonth.toDateString(), this.today.toDateString());
+
   }
 
   getAll(issueId, startDate, endDate){
@@ -21,6 +32,11 @@ export default class MainRoute extends Route {
       col.issues = this.activeIssuesWithColumnId(col.id).metricValue;
     });
 
+	var daylist = [];
+	var issuesForEachColumnJson = this.issuesForEachColumnWithTimeInterval(startDate, endDate);
+	issuesForEachColumnJson.forEach(issue=>{
+		daylist.push(issue["metricDate"]);
+	});
     return {
       issueId : issueId,
       startDate : startDate,
@@ -31,7 +47,24 @@ export default class MainRoute extends Route {
       completedInterval : this.completedIssuesWithTimeInterval(startDate, endDate),
       columnsInterval : this.issuesForEachColumnWithTimeInterval(startDate, endDate),
       openPR : this.openPullRequest(), 
-      commits : this.commits()}
+      commits : this.commits(),
+	  chartData : {
+        labels: ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09'],
+		  series: [
+			[5, 4, 8, 5, 4, 8, 5, 4, 8],
+			[10, 2, 7,10, 2, 7,10, 2, 7],
+			[8, 3, 6,8, 3, 6,8, 3, 6]
+		  ]
+      },
+	  issuesForEachColumn : {
+        labels: ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09'],
+		  series: [
+			[5, 4, 8, 5, 4, 8, 5, 4, 8],
+			[10, 2, 7,10, 2, 7,10, 2, 7],
+			[8, 3, 6,8, 3, 6,8, 3, 6]
+		  ]
+      }
+	  }
   }
 
   // @action

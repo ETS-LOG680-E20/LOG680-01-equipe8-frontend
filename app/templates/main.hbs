@@ -44,7 +44,10 @@
     {{/each}}
   </div>
   <hr>
-  <h2>Process time of issue {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
+  <h2>Process time of issue with id = {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
+  <hr>
+  
+  <h2>Process time of completed with interval <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.chartData}} /></h2>
   <hr>
 
   <h2>Number of pull requests : {{this.model.openPR}}</h2>
@@ -54,6 +57,9 @@
   <hr>
 
   <h2>Number of completed issues between {{this.model.startDate}} and {{this.model.endDate}} : {{this.model.completedInterval}}</h2>
+  <hr>
+
+  <h2>Number of Issues For Each Column between {{this.model.startDate}} and {{this.model.endDate}} : <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.issuesForEachColumn}} /></h2>
   <hr>
 
   <h2>State of issues with time interval</h2>
