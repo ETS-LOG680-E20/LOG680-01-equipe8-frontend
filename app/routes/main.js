@@ -2,10 +2,13 @@ import Route from '@ember/routing/route';
 
 export default class MainRoute extends Route {
   model(){
-    // var today = new Date();
     this.set('today', new Date());
     var lastMonth = new Date();
     lastMonth.setDate(this.today.getDate() - 30);
+    this.set('defaultStartDate', lastMonth.toDateString());
+    this.set('defaultEndDate', (new Date()).toDateString());
+    this.set('searchIssueId', 4601);
+
     this.set('lastMonth', lastMonth);
     this.set('baseURL', 'https://localhost:44319/metric/');
     return this.getAll(4601, this.lastMonth.toDateString(), this.today.toDateString());
@@ -17,20 +20,15 @@ export default class MainRoute extends Route {
     startDate = startDate || this.lastMonth;
     endDate = endDate || this.today;
 
-    // this.set('issueProcessTime', this.processTimeWithIssue(issueId));
-    // this.set('processTimeInterval', this.processTimeWithTimeInterval(startDate, endDate));
-
     var columns = this.getColumns();
     columns.forEach(col => {
       col.issues = this.activeIssuesWithColumnId(col.id).metricValue;
     });
-    // this.set('columns', columns);
-    // this.set('completedInterval', this.completedIssuesWithTimeInterval(startDate, endDate));
-    // this.set('columnsInterval', this.issuesForEachColumnWithTimeInterval(startDate, endDate));
-    // this.set('openPR', this.openPullRequest());
-    // this.set('commits', this.commits());
 
     return {
+      issueId : issueId,
+      startDate : startDate,
+      endDate : endDate,
       issueProcessTime : this.processTimeWithIssue(issueId),
       processTimeInterval : this.processTimeWithTimeInterval(startDate, endDate),
       columns : columns,

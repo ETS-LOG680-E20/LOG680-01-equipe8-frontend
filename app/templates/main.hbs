@@ -7,7 +7,7 @@
 	  <div class="input-group-prepend">
 		<span class="input-group-text" id="basic-addon1">Issue ID</span>
 	  </div>
-    <input type="text">
+    {{input value=searchIssueId}}
   </div>
   
   <div class="input-group col-sm">
@@ -15,8 +15,8 @@
 		<span class="input-group-text" id="basic-addon1">Start date</span>
 	  </div>
 	  <EmberFlatpickr
-			@defaultDate={{this.defaultDate}}
-			@onChange={{action (mut this.startDate)}}
+			@defaultDate={{this.defaultStartDate}}
+			@onChange={{action (mut this.searchStartDate)}}
 		  />
 	</div>
 	
@@ -25,7 +25,7 @@
 		<span class="input-group-text" id="basic-addon1">End date</span>
 	  </div>
 	  <EmberFlatpickr
-        @defaultDate={{this.defaultDate}}
+        @defaultDate={{this.defaultEndDate}}
         @onChange={{action (mut this.endDate)}}
       />
 	</div>
@@ -46,16 +46,19 @@
     {{/each}}
   </div>
   <hr>
-  <h2>Process time of issues</h2>
-  <div class="row">
-
-  </div>
+  <h2>Process time of issue {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
   <hr>
 
   <h2>Process time of completed with interval</h2>
   <hr>
 
-  <h2>Completed items with interval</h2>
+  <h2>Number of pull requests : {{this.model.openPR}}</h2>
+  <hr>
+
+  <h2>Number of commits : {{this.model.commits}}</h2>
+  <hr>
+
+  <h2>Number of completed issues between {{this.model.startDate}} and {{this.model.endDate}} : {{this.model.completedInterval}}</h2>
   <hr>
 
   <h2>State of issues with time interval</h2>
