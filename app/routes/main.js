@@ -2,15 +2,15 @@ import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 
 export default class MainRoute extends Route {
-  model(){
+  model(params){
     var today = new Date();
     var lastMonth = new Date();
     lastMonth.setDate(today.getDate() - 30);
 
-    var searchId = this.searchIssueId || 4601;
-    var startDate = this.searchStartDate || today;
-    var endDate = this.searchEndDate || lastMonth;
-
+    var searchId = params.searchIssueId || 4601;
+    var startDate = params.searchStartDate || today;
+    var endDate = params.searchEndDate || lastMonth;
+    console.log('je suis ici');
     this.set('baseURL', 'https://localhost:44319/metric/');
     return this.getAll(searchId, startDate.toDateString(), endDate.toDateString());
   }
@@ -34,11 +34,23 @@ export default class MainRoute extends Route {
       commits : this.commits()}
   }
 
-  // getSearchParams() {
-  //     console.log(this.searchIssueId);
-  //     console.log(this.searchStartDate);
-  //     console.log(this.searchEndDate);
-  //   }
+  // @action
+  // setSearchIssueId(value) {
+  //   console.log(value);
+  //   this.set('searchIssueId', value);
+  // }
+
+  // @action
+  // setSearchStartDateRoute(value) {
+  //   console.log(value);
+  //   this.set('searchStartDate', value);
+  // }
+
+  // @action
+  // setSearchEndDateRoute(value) {
+  //   console.log(value);
+  //   this.set('searchEndDate', value);
+  // }
 
   getColumns(){
     var url = `${this.baseURL}Columns`;
