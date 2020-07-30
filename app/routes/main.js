@@ -34,6 +34,11 @@ export default class MainRoute extends Route {
       col.issues = this.activeIssuesWithColumnId(col.id).metricValue;
     });
 
+	var daylist = [];
+	var issuesForEachColumnJson = this.issuesForEachColumnWithTimeInterval(startDate, endDate);
+	issuesForEachColumnJson.forEach(issue=>{
+		daylist.push(issue["metricDate"]);
+	});
     return {
       issueId : issueId,
       startDate : startDate,
@@ -46,7 +51,15 @@ export default class MainRoute extends Route {
       openPR : this.openPullRequest(), 
       commits : this.commits(),
 	  chartData : {
-        labels: ['Day1', 'Day2', 'Day3', 'Day3', 'Day3', 'Day3', 'Day3', 'Day3', 'Day3'],
+        labels: ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09'],
+		  series: [
+			[5, 4, 8, 5, 4, 8, 5, 4, 8],
+			[10, 2, 7,10, 2, 7,10, 2, 7],
+			[8, 3, 6,8, 3, 6,8, 3, 6]
+		  ]
+      },
+	  issuesForEachColumn : {
+        labels: ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09'],
 		  series: [
 			[5, 4, 8, 5, 4, 8, 5, 4, 8],
 			[10, 2, 7,10, 2, 7,10, 2, 7],
