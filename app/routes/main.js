@@ -1,25 +1,21 @@
 import Route from '@ember/routing/route';
+import { action } from '@ember/object';
 
 export default class MainRoute extends Route {
   model(){
-    this.set('today', new Date());
+    var today = new Date();
     var lastMonth = new Date();
-    lastMonth.setDate(this.today.getDate() - 30);
-    this.set('defaultStartDate', lastMonth.toDateString());
-    this.set('defaultEndDate', (new Date()).toDateString());
-    this.set('searchIssueId', 4601);
+    lastMonth.setDate(today.getDate() - 30);
 
-    this.set('lastMonth', lastMonth);
+    var searchId = this.searchIssueId || 4601;
+    var startDate = this.searchStartDate || today;
+    var endDate = this.searchEndDate || lastMonth;
+
     this.set('baseURL', 'https://localhost:44319/metric/');
-    return this.getAll(4601, this.lastMonth.toDateString(), this.today.toDateString());
-    // this.getAll();
+    return this.getAll(searchId, startDate.toDateString(), endDate.toDateString());
   }
 
   getAll(issueId, startDate, endDate){
-    issueId = issueId || 4601; //default
-    startDate = startDate || this.lastMonth;
-    endDate = endDate || this.today;
-
     var columns = this.getColumns();
     columns.forEach(col => {
       col.issues = this.activeIssuesWithColumnId(col.id).metricValue;
@@ -37,6 +33,12 @@ export default class MainRoute extends Route {
       openPR : this.openPullRequest(), 
       commits : this.commits()}
   }
+
+  // getSearchParams() {
+  //     console.log(this.searchIssueId);
+  //     console.log(this.searchStartDate);
+  //     console.log(this.searchEndDate);
+  //   }
 
   getColumns(){
     var url = `${this.baseURL}Columns`;
@@ -101,5 +103,10 @@ export default class MainRoute extends Route {
     xmlHttp.open( "GET", url, false );
     xmlHttp.send( null );
     return JSON.parse(xmlHttp.response)['metricValue'];
+  }
+
+  @action
+  reloadModel() {
+    this.refresh();
   }
 }
