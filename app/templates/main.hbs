@@ -48,8 +48,8 @@
   <hr>
   <h2>Process time of issue with id = {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
   <hr>
-
-  <h2>Process time of completed with interval <ChartistChart @type="line" @data={{this.model.chartData}} /></h2>
+  
+  <h2>Process time of completed with interval <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.chartData}} /></h2>
   <hr>
 
   <h2>Number of pull requests : {{this.model.openPR}}</h2>

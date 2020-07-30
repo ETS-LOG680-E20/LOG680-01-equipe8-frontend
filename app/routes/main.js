@@ -11,16 +11,17 @@ export default class MainRoute extends Route {
 
     this.set('lastMonth', lastMonth);
     this.set('baseURL', 'https://localhost:44319/metric/');
-    this.set('chartData', {
-      labels: ['Day1', 'Day2', 'Day3'],
-      series: [
-        [5, 4, 8],
-        [10, 2, 7],
-        [8, 3, 6]
-      ]
-    });
+	this.set('chartOptions',{
+		showArea: true,
+		lineSmooth: false,
+
+		axisX: {
+		  showGrid: false
+		}
+	  });
+
     return this.getAll(4601, this.lastMonth.toDateString(), this.today.toDateString());
-    // this.getAll();
+
   }
 
   getAll(issueId, startDate, endDate){
@@ -43,7 +44,16 @@ export default class MainRoute extends Route {
       completedInterval : this.completedIssuesWithTimeInterval(startDate, endDate),
       columnsInterval : this.issuesForEachColumnWithTimeInterval(startDate, endDate),
       openPR : this.openPullRequest(), 
-      commits : this.commits()}
+      commits : this.commits(),
+	  chartData : {
+        labels: ['Day1', 'Day2', 'Day3', 'Day3', 'Day3', 'Day3', 'Day3', 'Day3', 'Day3'],
+		  series: [
+			[5, 4, 8, 5, 4, 8, 5, 4, 8],
+			[10, 2, 7,10, 2, 7,10, 2, 7],
+			[8, 3, 6,8, 3, 6,8, 3, 6]
+		  ]
+      }
+	  }
   }
 
   getColumns(){
