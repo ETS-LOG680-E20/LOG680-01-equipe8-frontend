@@ -44,11 +44,6 @@
     {{/each}}
   </div>
   <hr>
-  <h2>Process time of issue with id = {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
-  <hr>
-  
-  <h2>Process time of completed with interval <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.chartData}} /></h2>
-  <hr>
 
   <h2>Number of pull requests : {{this.model.openPR}}</h2>
   <hr>
@@ -58,24 +53,12 @@
 
   <h2>Number of completed issues between {{this.model.startDate}} and {{this.model.endDate}} : {{this.model.completedInterval}}</h2>
   <hr>
+  <h2>Process time of issue with id = {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
+  <hr>
+  
+  <h2>Process time of completed with interval <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.chartData}} /></h2>
+  <hr>
 
   <h2>Number of Issues For Each Column between {{this.model.startDate}} and {{this.model.endDate}} : <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.issuesForEachColumn}} /></h2>
   <hr>
-
-  <h2>State of issues with time interval</h2>
-  <div class="row">
-    <ColumnIssues @columnName="To do" @numberOfIssues="150" @titleColorClass="text-primary">
-    </ColumnIssues>
-    <ColumnIssues @columnName="In progress" @numberOfIssues="20" @titleColorClass="text-success">
-    </ColumnIssues>
-    <ColumnIssues @columnName="Review in progress" @numberOfIssues="15" @titleColorClass="text-info">
-    </ColumnIssues>
-    <ColumnIssues @columnName="Reviewer approved" @numberOfIssues="3" @titleColorClass="text-secondary">
-    </ColumnIssues>
-    <ColumnIssues @columnName="Done" @numberOfIssues="3" @titleColorClass="text-warning">
-    </ColumnIssues>
-  </div>
-  <hr>
-
-  <h2>Process time of completed with interval</h2>
 </div>
