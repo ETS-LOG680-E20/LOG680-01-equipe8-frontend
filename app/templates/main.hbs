@@ -56,9 +56,27 @@
   <h2>Process time of issue with id = {{this.model.issueId}} : {{this.model.issueProcessTime}} hours</h2>
   <hr>
   
-  <h2>Process time of completed with interval <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.chartData}} /></h2>
+  <h2>Process time of completed with interval 
+  <br/><br/>
+  <div style="text-align:center;font-size:12pt;">
+	<div style="height: 25px;width: 50px;background-color: #d70206;display:inline-block;"></div><span style="padding: 0px 10px;">Issue 4601</span>
+	<div style="height: 25px;width: 50px;background-color: #f05b4f;display:inline-block;"></div><span style="padding: 0px 10px;">Issue 4602</span>
+	<div style="height: 25px;width: 50px;background-color: #f4c63d;display:inline-block;"></div><span style="padding: 0px 10px;">Issue 4603</span>
+  </div>
+  <br/>
+  <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.chartData}} /></h2>
   <hr>
 
-  <h2>Number of Issues For Each Column between {{this.model.startDate}} and {{this.model.endDate}} : <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.issuesForEachColumn}} /></h2>
+  <h2>Number of Issues For Each Column between {{this.model.startDate}} and {{this.model.endDate}} : 
+  <br/><br/>
+  <div style="text-align:center;font-size:12pt;">
+	<div style="height: 25px;width: 50px;background-color: #d70206;display:inline-block;"></div><span style="padding: 0px 10px;">To do</span>
+	<div style="height: 25px;width: 50px;background-color: #f05b4f;display:inline-block;"></div><span style="padding: 0px 10px;">In progress</span>
+	<div style="height: 25px;width: 50px;background-color: #f4c63d;display:inline-block;"></div><span style="padding: 0px 10px;">Review in progress</span>
+	<div style="height: 25px;width: 50px;background-color: #453d3f;display:inline-block;"></div><span style="padding: 0px 10px;">Reviewer approved</span>
+	<div style="height: 25px;width: 50px;background-color: #453d3f;display:inline-block;"></div><span style="padding: 0px 10px;">Done</span>
+  </div>
+  <br/>
+  <ChartistChart @type="line" @options={{this.model.chartOptions}} @ratio="ct-golden-section" @updateOnData={{false}} @data={{this.model.issuesForEachColumn}} /></h2>
   <hr>
 </div>
