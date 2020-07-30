@@ -2,20 +2,42 @@ import Route from '@ember/routing/route';
 
 export default class MainRoute extends Route {
   model(){
-    var today = new Date();
+    // var today = new Date();
+    this.set('today', new Date());
     var lastMonth = new Date();
-    lastMonth.setDate(today.getDate() - 30);
-    this.set('defaultDate', 'test');
+    lastMonth.setDate(this.today.getDate() - 30);
+    this.set('lastMonth', lastMonth);
     this.set('baseURL', 'https://localhost:44319/metric/');
-    this.set('columns', this.getColumns());
-    this.set('test1', this.processTimeWithIssue(4601));
-    this.set('test2', this.processTimeWithTimeInterval(lastMonth.toDateString(), today.toDateString()));
-    this.set('test3', this.activeIssuesWithColumnId(8520666));
-    this.set('test4', this.completedIssuesWithTimeInterval(lastMonth.toDateString(), today.toDateString()));
-    this.set('test5', this.issuesForEachColumnWithTimeInterval(lastMonth.toDateString(), today.toDateString()));
-    this.set('test5', this.issuesForEachColumnWithTimeInterval(lastMonth.toDateString(), today.toDateString()));
-    this.set('test6', this.openPullRequest());
-    this.set('test7', this.commits());
+    return this.getAll(4601, this.lastMonth.toDateString(), this.today.toDateString());
+    // this.getAll();
+  }
+
+  getAll(issueId, startDate, endDate){
+    issueId = issueId || 4601; //default
+    startDate = startDate || this.lastMonth;
+    endDate = endDate || this.today;
+
+    // this.set('issueProcessTime', this.processTimeWithIssue(issueId));
+    // this.set('processTimeInterval', this.processTimeWithTimeInterval(startDate, endDate));
+
+    var columns = this.getColumns();
+    columns.forEach(col => {
+      col.issues = this.activeIssuesWithColumnId(col.id).metricValue;
+    });
+    // this.set('columns', columns);
+    // this.set('completedInterval', this.completedIssuesWithTimeInterval(startDate, endDate));
+    // this.set('columnsInterval', this.issuesForEachColumnWithTimeInterval(startDate, endDate));
+    // this.set('openPR', this.openPullRequest());
+    // this.set('commits', this.commits());
+
+    return {
+      issueProcessTime : this.processTimeWithIssue(issueId),
+      processTimeInterval : this.processTimeWithTimeInterval(startDate, endDate),
+      columns : columns,
+      completedInterval : this.completedIssuesWithTimeInterval(startDate, endDate),
+      columnsInterval : this.issuesForEachColumnWithTimeInterval(startDate, endDate),
+      openPR : this.openPullRequest(), 
+      commits : this.commits()}
   }
 
   getColumns(){
@@ -23,7 +45,8 @@ export default class MainRoute extends Route {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", url, false );
     xmlHttp.send( null );
-    return JSON.parse(xmlHttp.response)['metricValue'];
+    console.log(JSON.parse(xmlHttp.response));
+    return JSON.parse(xmlHttp.response);
   }
 
   processTimeWithIssue(id){
