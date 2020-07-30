@@ -11,6 +11,14 @@ export default class MainRoute extends Route {
 
     this.set('lastMonth', lastMonth);
     this.set('baseURL', 'https://localhost:44319/metric/');
+    this.set('chartData', {
+      labels: ['Day1', 'Day2', 'Day3'],
+      series: [
+        [5, 4, 8],
+        [10, 2, 7],
+        [8, 3, 6]
+      ]
+    });
     return this.getAll(4601, this.lastMonth.toDateString(), this.today.toDateString());
     // this.getAll();
   }
